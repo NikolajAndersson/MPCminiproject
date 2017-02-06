@@ -169,9 +169,63 @@ Correct_Answer = round(CorrectPr(rating))%[happyprocent; sadprocent; angryprocen
 pM = round(mean(Correct_Answer),2)
 Correct_Answer = [Correct_Answer; pM]
 table(Correct_Answer, 'RowNames', roworder)
-%% What needs to be done? 
+
+%% ANOVA
+% ANOVA repeated measure
+% Data containing achievement for each song and emotion
+%     fearBE
+%     fearBR
+%     fearHA
+%     fearMO
+%     
+%     angryBE
+%     angryBR
+%     angryHA
+%     angryMO
+%     
+%     happyBE
+%     happyBR
+%     happyHA
+%     happyMO
+%     
+%     sadBE
+%     sadBR
+%     sadHA
+%     sadMO
+    
+    y = [ fearBE; fearBR; fearHA; fearMO];% ... 
+%     ;angryBR ...
+%     ;angryHA ...
+%     ;angryMO ...
+%     ;happyBE ...
+%     ;happyBR ...
+%     ;happyHA ...
+%     ;happyMO ...
+%     ;sadBE ...
+%     ;sadBR ...
+%     ;sadHA ...
+%     ;sadMO] 
+    
+    %anova2(y,4)
+    labels = {'Berwald';'Brahms';'Haydn';'Mozart'}
+    t = table(labels,y)
+    vNames = table([1:27]','VariableNames',{'Measurements'});
+    rm = fitrm(t,'y~Berwald + Brahms + Haydn + Mozart','WithinDesign', vNames)
 % Other measures: r, E ? 
 r = corr([0 0 1 0]', [5 3 6 2]') % intended emotion corr rated
 E = 6/sum([5 3 6 2]) % rated intended emotion / rated emotions
-% t-test and ANOVA
-% Can't be done, no other test group
+%% MIR
+tempoberang = mirtempo('berang.wav')
+tempoberhap = mirtempo('berhap.wav')
+tempoberfea = mirtempo('berfea.wav')
+tempobersad = mirtempo('bersad.wav')
+
+tempobraang = mirtempo('braang.wav')
+tempobrahap = mirtempo('brahap.wav')
+tempobrafea = mirtempo('brafea.wav')
+tempobrasad = mirtempo('brasad.wav')
+
+tempohayang = mirtempo('hayang.wav')
+tempohayhap = mirtempo('hayhap.wav')
+tempohayfea = mirtempo('hayfea.wav')
+tempohaysad = mirtempo('haysad.wav')
